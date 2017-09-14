@@ -22,19 +22,19 @@ for(var i=0; i<report.length; i++){
     }
 };
 
-console.log(assingment);
-
 var random = Math.floor(Math.random() * participant.length); // this generates a random number until 13 (participant length)
 console.log(random); // random list
 
 for (var key in assingment) {
         while (assingment[key].team.length <2) {
             var random = Math.floor(Math.random() * participant.length); // this generates a random number until 13 (participant length)
+            console.log(random);
             assingment[key].team.push(participant[random]); // this pushes one part into each team array
             participant.splice(random, 1); // delete participant that just got added.
         }
     };
 
+console.log(assingment);
 
 
 
