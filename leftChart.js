@@ -12,15 +12,19 @@ d3.csv("wiid.csv", function(error, data) {
     } else {
 
 //CLEANING THE DATA
-        //let countries = ["Angola","Benin","Botswana", "Burkina Faso", 'Burundi', 'Cameroon', 'Cape Verde', 'Central African Republic', 'Chad', 'Comoros', 'Democratic Republic of the Congo', 'Republic of the Congo', 'Cote d\'Ivoire', 'Djibouti', 'Ethiopia', 'Gabon', 'The Gambia', 'Ghana', 'Guinea', 'Guinea-Bissau', 'Kenya', 'Lesotho', 'Liberia', 'Madagascar', 'Malawi', 'Mali', 'Mauritania', 'Mauritius', 'Mozambique', 'Namibia', 'Niger', 'Reunion', 'Rwanda', 'Sao Tome and Principe', 'Senegal', 'Seychelles', 'Sierra Leone', 'Somalia', 'South Africa', 'Sudan', 'Swaziland', 'Tanzania', 'Togo', 'Uganda', 'Zambia', 'Zimbabwe'];
-        let countries = ['Germany', 'United Kingdom', 'Greece']
+        let countries = ["Angola","Benin","Botswana", "Burkina Faso", 'Burundi', 'Cameroon', 'Cape Verde', 'Central African Republic', 'Chad', 'Comoros', 'Democratic Republic of the Congo', 'Republic of the Congo', 'Cote d\'Ivoire', 'Djibouti', 'Ethiopia', 'Gabon', 'The Gambia', 'Ghana', 'Guinea', 'Guinea-Bissau', 'Kenya', 'Lesotho', 'Liberia', 'Madagascar', 'Malawi', 'Mali', 'Mauritania', 'Mauritius', 'Mozambique', 'Namibia', 'Niger', 'Reunion', 'Rwanda', 'Sao Tome and Principe', 'Senegal', 'Seychelles', 'Sierra Leone', 'Somalia', 'South Africa', 'Sudan', 'Swaziland', 'Tanzania', 'Togo', 'Uganda', 'Zambia', 'Zimbabwe'];
+        //let countries = ['Germany', 'United Kingdom', 'Greece'];
 
         // Only countries in SSA
         let dataForChart = [];
         for (let item of countries) {
             for (let row of data) {
                 if (row.Country.includes(item)) {
-                    dataForChart.push(row)
+                    if (row.Welfaredefn_new = 'Consumption') {
+                        if (row.Equivsc_new = 'Household per capita') {
+                            if(row.AreaCovr = 'All') {dataForChart.push(row)}
+                        }
+                    }
                 } //close if
             }
         } // close for loops
@@ -75,7 +79,7 @@ d3.csv("wiid.csv", function(error, data) {
                 dataGraph[obKey] = yearData;
             }
         }
-        console.log(dataGraph["Benin"]); //check if correct data
+        //console.log(dataGraph["Benin"]); //check if correct data
 
 
 // BUILDING ELEMENTS
