@@ -49,8 +49,9 @@ h2 {
 }
 
 .countries {
-    position: relative;
+    position: absolute;
     text-align: right;
+    padding-left: 600px;
     z-index: 2;
 }
 
