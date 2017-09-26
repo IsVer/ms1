@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MS-1 Assignment September 26</title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <!--in case more useful to have a seperate css file-->
+    <link rel="stylesheet" type="text/css" href="styles.css" >
+
+    <!-- calling seperate js files with d3-->
+    <script src="leftChart.js"></script>
+    <script src="rightChart.js"></script>
+
+</head>
+<body>
+<div class="container">
+    <h2> Inequality among Unequals in the same union</h2>
+    <h4> Comparing Inequality data for three different EU members</h4>
+    <div class="countries">
+        <p id = 'activeCountry'>Germany </p>
+        <p id = 'activeCountry'>United Kingdom </p>
+        <p id = 'activeCountry'>Greece</p>
+    </div>
+    <div style="margin: 5px; width: 600px;height: 500px" id="chartLeft">
+        <!--<p id = "tagYaxis">Gini coefficient (in %)</p>-->
+    </div>
+    <div id="chartRight">
+    </div>
+</div>
+
+
+
+<div id="footer">
+    MS1 Assignment 1 - version 1
+</div>
+
+
+
+</body>
+</html>
