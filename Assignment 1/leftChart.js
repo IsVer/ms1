@@ -12,8 +12,8 @@ d3.csv("wiid.csv", function(error, data) {
     } else {
 
 //CLEANING THE DATA
-        let countries = ["Angola","Benin","Botswana", "Burkina Faso", 'Burundi', 'Cameroon', 'Cape Verde', 'Central African Republic', 'Chad', 'Comoros', 'Democratic Republic of the Congo', 'Republic of the Congo', 'Cote d\'Ivoire', 'Djibouti', 'Ethiopia', 'Gabon', 'The Gambia', 'Ghana', 'Guinea', 'Guinea-Bissau', 'Kenya', 'Lesotho', 'Liberia', 'Madagascar', 'Malawi', 'Mali', 'Mauritania', 'Mauritius', 'Mozambique', 'Namibia', 'Niger', 'Reunion', 'Rwanda', 'Sao Tome and Principe', 'Senegal', 'Seychelles', 'Sierra Leone', 'Somalia', 'South Africa', 'Sudan', 'Swaziland', 'Tanzania', 'Togo', 'Uganda', 'Zambia', 'Zimbabwe'];
-
+        //let countries = ["Angola","Benin","Botswana", "Burkina Faso", 'Burundi', 'Cameroon', 'Cape Verde', 'Central African Republic', 'Chad', 'Comoros', 'Democratic Republic of the Congo', 'Republic of the Congo', 'Cote d\'Ivoire', 'Djibouti', 'Ethiopia', 'Gabon', 'The Gambia', 'Ghana', 'Guinea', 'Guinea-Bissau', 'Kenya', 'Lesotho', 'Liberia', 'Madagascar', 'Malawi', 'Mali', 'Mauritania', 'Mauritius', 'Mozambique', 'Namibia', 'Niger', 'Reunion', 'Rwanda', 'Sao Tome and Principe', 'Senegal', 'Seychelles', 'Sierra Leone', 'Somalia', 'South Africa', 'Sudan', 'Swaziland', 'Tanzania', 'Togo', 'Uganda', 'Zambia', 'Zimbabwe'];
+        let countries = ['Germany', 'United Kingdom', 'Greece']
 
         // Only countries in SSA
         let dataForChart = [];
@@ -118,6 +118,10 @@ d3.csv("wiid.csv", function(error, data) {
                         .data([data])
                         .attr("class", "line")
                         .attr("d", valueline);
+                    d3.select("path").append("text")
+                        .attr("id", "hoverlabel")
+                        .style("text-anchor", "left")
+                        .text("blalbal");
                 }
         }// end for loop for all countries in dataGraph4
 
@@ -156,6 +160,11 @@ d3.csv("wiid.csv", function(error, data) {
             .attr("x",0 - (chartHeight / 2))
             .style("text-anchor", "middle")
             .text("Gini coefficient (in %)");
+
+        d3.select("line").on("hover", function () {
+        d3.select(".activeCountry")
+            .style.fontWeight="bold";
+            })// end of .on mouseout
 
     } // closes else after error
 }); // closes data read and call back
@@ -299,7 +308,7 @@ d3.csv("wiid.csv", function(error, data) {
 //
 //         activeCountry = d.Country;
 //
-//         // Setting positio for the district label
+//         // Setting position for the district label
 //         let xPosition = wLine / 2 + 35;
 //         let yPosition = marginLine.top - 10;
 //
