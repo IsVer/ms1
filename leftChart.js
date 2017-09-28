@@ -1,35 +1,42 @@
 //GLOBAL VARIABLES
 //Store width, height and margin in variables
-const wLine = 600;//(window.innerWidth)/2;
+const wLine = window.innerWidth/1.7;//(window.innerWidth)/2;
 const hLine = 450//(window.innerHeight/1.2);
-const marginLine = {top: 30, right: 60, bottom: 40, left: 70};
-
+const marginLine = {top: 15, right: 10, bottom: 40, left: 90};
+let activeCountry;
 let data;
 
-d3.csv("wiid.csv", function(error, data) {
+
+
+d3.csv("wiid_Afric.csv", function(error, data) {
     if (error) {
         throw error;
-    } else {
+    } else {a
 
 //CLEANING THE DATA
-        let countries = ["Angola","Benin","Botswana", "Burkina Faso", 'Burundi', 'Cameroon', 'Cape Verde', 'Central African Republic', 'Chad', 'Comoros', 'Democratic Republic of the Congo', 'Republic of the Congo', 'Cote d\'Ivoire', 'Djibouti', 'Ethiopia', 'Gabon', 'The Gambia', 'Ghana', 'Guinea', 'Guinea-Bissau', 'Kenya', 'Lesotho', 'Liberia', 'Madagascar', 'Malawi', 'Mali', 'Mauritania', 'Mauritius', 'Mozambique', 'Namibia', 'Niger', 'Reunion', 'Rwanda', 'Sao Tome and Principe', 'Senegal', 'Seychelles', 'Sierra Leone', 'Somalia', 'South Africa', 'Sudan', 'Swaziland', 'Tanzania', 'Togo', 'Uganda', 'Zambia', 'Zimbabwe'];
+        let countries = ["Angola","Benin","Botswana","Burkina Faso", 'Burundi', 'Cameroon', 'Cape Verde', 'Central African Republic', 'Chad', 'Comoros', 'Democratic Republic of the Congo', 'Republic of the Congo', 'Cote d\'Ivoire', 'Djibouti', 'Ethiopia', 'Gabon', 'The Gambia', 'Ghana', 'Guinea', 'Guinea-Bissau', 'Kenya', 'Lesotho', 'Liberia', 'Madagascar', 'Malawi', 'Mali', 'Mauritania', 'Mauritius', 'Mozambique', 'Namibia', 'Niger', 'Reunion', 'Rwanda', 'Sao Tome and Principe', 'Senegal', 'Seychelles', 'Sierra Leone', 'Somalia', 'South Africa', 'Sudan', 'Swaziland', 'Tanzania', 'Togo', 'Uganda', 'Zambia', 'Zimbabwe'];
+
         //let countries = ['Germany', 'United Kingdom', 'Greece'];
 
         // Only countries in SSA
         let dataForChart = [];
         for (let item of countries) {
-            for (let row of data) {
+            for (let row of data) { //clean data
                 if (row.Country.includes(item)) {
                     if (row.Welfaredefn_new = 'Consumption') {
                         if (row.Equivsc_new = 'Household per capita') {
-                            if(row.AreaCovr = 'All') {dataForChart.push(row)}
+                            if(row.UofAnala_new = 'Person') {
+                                if (row.AreaCovr_new = 'All') {
+                                    dataForChart.push(row)
+                                }
+                            }
                         }
                     }
                 } //close if
             }
         } // close for loops
 
-        // set up data on years
+ // set up data on years
         let years = [];
         let yearlist = function (y) {
             for (let i in dataForChart) {
@@ -79,7 +86,7 @@ d3.csv("wiid.csv", function(error, data) {
                 dataGraph[obKey] = yearData;
             }
         }
-        //console.log(dataGraph["Benin"]); //check if correct data
+ //console.log(dataGraph["Benin"]); //check if correct data
 
 
 // BUILDING ELEMENTS
@@ -92,9 +99,11 @@ d3.csv("wiid.csv", function(error, data) {
             .attr("height", chartHeight + marginLine.top + marginLine.bottom)
             .attr("width", chartWidth + marginLine.left + marginLine.right);
 
+
         let g = chart.append('g')
                     .attr("transform", "translate(" + (marginLine.left) + "," + (marginLine.top) + ")");
 
+        // let tooltip = d3.select("g").append("div").attr("class", "tooltip");
 
         // Set the ranges of the graphs lines
         let x = d3.scaleLinear().range([0,chartWidth]);
@@ -104,33 +113,117 @@ d3.csv("wiid.csv", function(error, data) {
         x.domain([yearsMin, yearsMax]);
         y.domain([0, giniMax]);
 
+
         for (let key in dataGraph) {
-                if (dataGraph.hasOwnProperty(key)){
+                if (dataGraph.hasOwnProperty(key)) {
                     console.log(key + " >> " + dataGraph[key]);
+                    let hoverCountryLine = key;
+                    //activeCountry = key; // this is for showing the country when hovering over the line
 
                     let data = dataGraph[key];
                     console.log(data[1]); //check what data is
 
                     // create valuelines
                     let valueline = d3.line()
-                        .x(function (d) {return x(d.year);
+                        .x(function (d) {
+                            return x(d.year);
                         })
-                        .y(function (d) {return y(d.gini);
+                        .y(function (d) {
+                            return y(d.gini);
                         });
+
                     // Add the valueline path.
                     g.append("path") // class "line"
                         .data([data])
                         .attr("class", "line")
-                        .attr("d", valueline);
-                    d3.select("path").append("text")
-                        .attr("id", "hoverlabel")
-                        .style("text-anchor", "left")
-                        .text("blalbal");
-                }
-        }// end for loop for all countries in dataGraph4
+                        .attr("d", valueline)
+                        .append("svg:title")
+                        .attr('class', 'tooltip')
+                        .text(function() {return key });
 
-        // Add x axis
-        let xStart = chartHeight - marginLine.bottom - marginLine.top;
+                    g.append("line").data([data])
+                        .attr('class', 'historyLine')
+                        .attr("y1", y(0))
+                        .attr("y2", y(100))
+                        .attr('x1', x(1994))
+                        .attr('x2', x(1994))
+                        .attr("stroke", "red")
+                        .attr( "stroke-width", ".4");
+
+
+                    g.append("line").data([data])
+                        .attr('class', 'historyLine')
+                        .attr("y1", y(0))
+                        .attr("y2", y(100))
+                        .attr('x1', x(2002))
+                        .attr('x2', x(2002))
+                        .attr("stroke", "red")
+                        .attr( "stroke-width", ".4");
+
+                    g.append("line").data([data])
+                        .attr('class', 'historyLine')
+                        .attr("y1", y(0))
+                        .attr("y2", y(100))
+                        .attr('x1', x(2011))
+                        .attr('x2', x(2011))
+                        .attr("stroke", "red")
+                        .attr( "stroke-width", ".4")
+                        .append('text')
+                        .attr('font-size', '11px')
+                        .attr('fill', 'black')
+                        .attr("transform", "rotate(-90)")
+                        .attr("y", 200)
+                        // .style("text-anchor", "middle")
+                        .attr("x",190)
+                        .text("asdfasdfasdfsdfsdfdsfsdfsdfdsfdsfdsfdsf");
+
+                    g.append("line").data([data])
+                        .attr('class', 'historyLine')
+                        .attr("y1", y(0))
+                        .attr("y2", y(100))
+                        .attr('x1', x(2008))
+                        .attr('x2', x(2008))
+                        .attr("stroke", "red")
+                        .attr( "stroke-width", ".4");
+
+                    d3.select('g').append('text')
+                            .attr('id', 'history1')
+                            .attr('font-size', '11px')
+                            .attr('fill', 'black')
+                            .attr("transform", "rotate(-90)")
+                            .attr("y", 200)
+                            // .style("text-anchor", "middle")
+                            .attr("x",190)
+                            .text("asdfasdfasdfsdfsdfdsfsdfsdfdsfdsfdsfdsf");
+
+                //     d3.selectAll('path')
+                //         append
+                //         .on("mouseover", function () {
+                //     d3.select('tooltip')
+                //         .transition()
+                //         .duration(200)
+                //         .style("opacity", 1)
+                //         .html('key')
+                //         .style("left", (d3.event.pageX) + "px")
+                //         .style("top", (d3.event.pageY - 28) + "px");
+                // })
+                //         .on("mouseout", function () {
+                //             d3.select('tooltip')
+                //                 .transition()
+                //                 .duration(500)
+                //                 .style("opacity", 0);
+                //         });
+                // g.select('line').data([data]).enter().append("line")
+                //     attr('class', 'history')
+                //     attr('x', function(d){
+                //         if (d.year = 1994)
+                //             return
+                //     })
+                //
+                }}//hold
+
+// Add X axis
+        //et xStart = chartHeight - marginLine.bottom - marginLine.top;
         g.append("g")
             .attr("class", "axis") // mind class of "axis"
             .attr("transform", "translate(0," + chartHeight + ")")
@@ -139,24 +232,16 @@ d3.csv("wiid.csv", function(error, data) {
             .selectAll("text")
                 .style("text-anchor", "end")
                 .attr("transform", "rotate(-65)");
-            // Add text label for the x axis
-            // chart.append("text")
-            //     .attr("class", "labels")
-            //     .attr("transform",
-            //         // "translate(" + ((wLine - ((marginLine.left - 110) + marginLine.right))/2) + " ," +
-            //         // (hLine - marginLine.bottom + ")")
-            //     .style("text-anchor", "middle")
-            //     .text("Years");
 
 
-        // Add the Y Axis
+// Add the Y Axis
         g.append("g")
             .attr("class", "axis") // mind class of "axis"
             //.attr("transform", "translate(" + (marginLine.left) + "," + marginLine.top + ")")
             .call(d3.axisLeft(y)
                 .tickFormat(d3.format("d"))
             );
-        // Add text label for the y axis
+// Add text label for the y axis
         g.append("text")
             .attr("class", "labels") // attach id
             .attr("transform", "rotate(-90)")
@@ -165,72 +250,10 @@ d3.csv("wiid.csv", function(error, data) {
             .style("text-anchor", "middle")
             .text("Gini coefficient (in %)");
 
-        d3.select("line").on("hover", function () {
-        d3.select(".activeCountry")
-            .style.fontWeight="bold";
-            })// end of .on mouseout
-
     } // closes else after error
 }); // closes data read and call back
 
 
-// //BUILDING THE GRAPH
-
-        // // Scale the width and height
-        // let xScaleLine = d3.scaleLinear()
-        //     .domain([0, sortedYears.length]) //****************needs to be something else!!
-        //     .range([marginLine.left, wLine - marginLine.right - marginLine.left]);
-        //
-        // let yScaleLine = d3.scaleLinear()
-        //     .domain([0, 78.6])
-        //     .range([marginLine.top, hLine - marginLine.bottom]);
-
-
-
-
-
-
-// // set the ranges
-//         let x = d3.scaleTime().range([0, wLine]);
-//         let y = d3.scaleLinear().range([hLine, 0]);
-//
-//     for (item of dataForChart[1]) {
-//     // define the line
-//         let valueline = d3.line()
-//             .x(function (dataForChart) {
-//                 return x(dataForChart[1][]Year);
-//             })
-//             .y(function (dataForChart) {
-//                 return y(d.Gini);
-//             });
-//     }
-
-//         linechart.append("text")
-//             .attr("id", "hoverLabel")
-//             .attr("x", xPosition)
-//             .attr("y", yPosition)
-//             .attr("text-anchor", "start")
-//             .attr("font-family", "ff-nuvo-sc-web-pro-1,ff-nuvo-sc-web-pro-2, sans-serif")
-//             .attr("font-size", "20px")
-
-
-
-
-// let activeDistrict;
-
-// Load in csv data
-
-//
-//
-//     function svg(data) {
-//         let tmp = [];
-//         for(let i in data) {
-//             tmp.push(data[i].operatingExpenses);
-//         }
-//         let max = d3.max(tmp);
-//         console.log(max);
-//
-//
 //
 //
 // // // Setting x position for line labels
