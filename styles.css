@@ -1,14 +1,18 @@
 .container {
-    width: 60%;
-    height: 50%;
-    margin: 25px auto 25px auto;
-    padding: 50px 50px 50px 50px;
+    width: 80%;
+    height: 20%;
+    margin: 25px auto 15px auto;
+    padding: 10px 5px 10px 5px;
     background-color: white;
     box-shadow: 0 0 20px #ccc;
 }
 
 
-
+#history1{
+    font-family: "adelle-1","adelle-2", constantia, cambria, Georgia, serif;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
 
 .axis text {
     font-family: "adelle-1","adelle-2", constantia, cambria, Georgia, serif;
@@ -34,58 +38,64 @@ body {
     color: #888888;
     font-size: 1rem;
     text-align: center;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
 }
 h1 {
     font-size: 24px;
-    margin: 0;
     color: #5387bd;
     font-weight: normal;
 }
 
 h2 {
+    margin-top: 5px;
+    text-align: center;
     font-weight: normal;
     color: #808080;
 }
 
-.countries {
+h4 {
+    text-align: center;
+}
+
+.countriesBlock {
+    display: inline-block;
+    /*background-color: cornflowerblue;*/
+    width: 120px;
+    height: 15vw;
     position: absolute;
+    overflow-y: scroll;
     text-align: right;
-    padding-left: 600px;
+    padding-top: 100px;
+    padding-right: 100px;
+    margin-top: 100px;
     z-index: 2;
+    color: #808080;
+
 }
 
 p {
     color: #808080;
 }
 
+section {a
+    /*display: absolute;*/
+    align-items: center;
+    justify-content: left;
+    padding: 2px;
+}
+
 svg {
     background-color: white;
 }
 
-#intro {
-    width: 740px;
-    line-height: 150%;
-}
+
 
 #chartLeft {
     display: inline-block;
     /*	float: right;*/
 }
 
-#chartRight {
-    display: inline-block;
-    /*	float: left;*/
-}
 
-
-
-/*#footer {
-	clear: both;
-	width: 760px;
-	line-height: 150%;
-	font-size: 12px;
-}*/
 
 path {
     stroke: #888;
@@ -216,4 +226,27 @@ rect:hover {
 .barlabel {
     font-family: "ff-nuvo-sc-web-pro-1","ff-nuvo-sc-web-pro-2", sans-serif;
     font-size:11px;
+}
+
+
+
+
+/*?????????????*/
+svg.tooltip {
+    font-family: "adelle-1","adelle-2", constantia, cambria, Georgia, serif;
+    position: absolute;
+    text-align: center;
+    width: 60px;
+    height: 28px;
+    padding: 2px;
+    background: white;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+
+body.countriesTitle {
+    text-align: right;
+    position: absolute;
 }
