@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>MS-1 Assignment September 26</title>
     <script src="https://d3js.org/d3.v4.min.js"></script>
+
     <!--in case more useful to have a seperate css file-->
     <link rel="stylesheet" type="text/css" href="styles.css" >
 
@@ -14,62 +15,68 @@
 </head>
 <body>
 <div class="container">
-    <!--<h2> Inequality among Unequals in the same union</h2>-->
-    <!--<h4> Comparing Inequality data for three different EU members</h4>-->
-    <!--<h4> Comparing among Sub-Saharan African Countries</h4>-->
-    <h2> Complex Inequality </h2>
-    <h4> Comparing inequality among Sub-Saharan African Countries</h4>
-    <div class="countries">
-        <p id = 'activeCountry'>Angola </p>
-        <p id = 'activeCountry'>Benin</p>
-<!--         <p id = 'activeCountry'>Botswana</p>
-        <p id = 'activeCountry'>Burkina Faso</p>
-        <p id = 'activeCountry'>Burundi</p>
-        <p id = 'activeCountry'>Cameroon</p> -->
-        <!--<p id = 'activeCountry'>Cape Verde</p>-->
-        <!--<p id = 'activeCountry'>Central African Republic</p>-->
-        <!--<p id = 'activeCountry'>Chad</p>-->
-        <!--<p id = 'activeCountry'>Comoros</p>-->
-        <!--<p id = 'activeCountry'>Democratic Republic of the Congo</p>-->
-        <!--<p id = 'activeCountry'>Republic of the Congo</p>-->
-        <!--<p id = 'activeCountry'>Cote d'Ivoire</p>-->
-        <!--<p id = 'activeCountry'>Djibouti</p>-->
-        <!--<p id = 'activeCountry'>Ethiopia</p>-->
-        <!--<p id = 'activeCountry'>Gabon</p>-->
-        <!--<p id = 'activeCountry'>The Gambia</p>-->
-        <!--<p id = 'activeCountry'>Ghana</p>-->
-        <!--<p id = 'activeCountry'>Guinea</p>-->
-        <!--<p id = 'activeCountry'>Guinea-Bissau</p>-->
-        <!--<p id = 'activeCountry'>Kenya</p>-->
-        <!--<p id = 'activeCountry'>Lesotho</p>-->
-        <!--<p id = 'activeCountry'>Liberia</p>-->
-        <!--<p id = 'activeCountry'>Madagascar</p>-->
-        <!--<p id = 'activeCountry'>Malawi</p>-->
-        <!--<p id = 'activeCountry'>Mali</p>-->
-        <!--<p id = 'activeCountry'>Mauritania</p>-->
-        <!--<p id = 'activeCountry'>Mozambique</p>-->
-        <!--<p id = 'activeCountry'>Mauritius</p>-->
-        <!--<p id = 'activeCountry'>Namibia</p>-->
-        <!--<p id = 'activeCountry'>Niger</p>-->
-        <!--<p id = 'activeCountry'>Reunion</p>-->
-        <!--<p id = 'activeCountry'>Rwanda</p>-->
-        <!--<p id = 'activeCountry'>Senegal</p>-->
-        <!--<p id = 'activeCountry'>Sierra Leone</p>-->
-        <!--<p id = 'activeCountry'>Somalia</p>-->
-        <!--let countries =   '', 'Ma', 'Sao Tome and Principe', 'Senegal', 'Seychelles', 'Sierra Leone', 'Somalia', 'South Africa', 'Sudan', 'Swaziland', 'Tanzania', 'Togo', 'Uganda', 'Zambia', 'Zimbabwe'];-->
 
+    <h2> Unequal Inequality </h2>
+    <h4> Comparing inequality among Sub-Saharan African countries</h4>
+    <div style= "margin: 1px; width: 880px;height: 500px" id="chartLeft"></div>
+
+
+
+    <!--<div class="countriesTitle">Countries</div>-->
+
+    <div class="countriesBlock">
+    <section>Angola </section>
+    <section>Benin</section>
+    <section>Botswana</section>
+    <section>Burkina Faso</section>
+    <section>Burundi</section>
+    <section>Cameroon</section>
+    <section>Cape Verde</section>
+    <section>Central African Republic</section>
+    <section>Chad</section>
+    <section>Comoros</section>
+    <section>Democratic Republic of the Congo</section>
+    <section>Republic of the Congo</section>
+    <section>Cote d'Ivoire</section>
+    <section>Djibouti</section>
+    <section>Ethiopia</section>
+    <section>Gabon</section>
+    <section>The Gambia</section>
+    <section>Ghana</section>
+    <section>Guinea</section>
+    <section>Guinea-Bissau</section>
+    <section>Kenya</section>
+    <section>Lesotho</section>
+    <section>Liberia</section>
+    <section>Madagascar</section>
+    <section>Malawi</section>
+    <section>Mali</section>
+    <section>Mauritania</section>
+    <section>Mozambique</section>
+    <section>Mauritius</section>
+    <section>Namibia</section>
+    <section>Niger</section>
+    <section>Reunion</section>
+    <section>Rwanda</section>
+    <section>Senegal</section>
+    <section>Sierra Leone</section>
+    <section>Somalia</section>
+    <section>South Africa</section>
+    <section>Sudan</section>
+    <section>Swaziland</section>
+    <section>Tanzania</section>
+    <section>Togo</section>
+    <section>Uganda</section>
+    <section>Zambia</section>
+    <section>Zimbabwe</section>
     </div>
-    <div style="margin: 5px; width: 600px;height: 500px" id="chartLeft">
-        <!--<p id = "tagYaxis">Gini coefficient (in %)</p>-->
-    </div>
-    <div id="chartRight">
-    </div>
+
 </div>
 
 
 
 <div id="footer">
-    MS1 Assignment 1 - version 1
+    MS1 Assignment 1 - Version 1
 </div>
 
 
